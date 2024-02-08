@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+(If on Android, download the "Expo Go" app)
+
 Install dependencies for web:
 `npx expo install react-dom react-native-web @expo/webpack-config`
 
