@@ -14,3 +14,6 @@ Start Expo App:
 
 [Expo Docs](https://docs.expo.dev/tutorial/create-your-first-app/)
 [Set up NativeWind/Tailwind with Expo](https://www.nativewind.dev/quick-starts/expo)
+
+## Working with MongoDB and Realm
+[Docs](https://www.mongodb.com/docs/realm/sdk/react-native/)
