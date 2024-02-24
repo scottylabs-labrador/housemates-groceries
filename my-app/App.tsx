@@ -7,8 +7,8 @@ import { Text, View } from 'react-native';
 
 export default function App() {
 
-  const isHermes = () => !!global.HermesInternal;
-  console.log('isHermes', isHermes());
+  // const isHermes = () => !!global.HermesInternal;
+  // console.log('isHermes', isHermes());
 
   return (
     <AppProvider id={"application-0-drlvw"}>
