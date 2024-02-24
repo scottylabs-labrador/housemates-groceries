@@ -6,7 +6,7 @@ import { getDatabase, ref, set } from "firebase/database";
 const firebaseConfig = {
   // ...
   // The value of `databaseURL` depends on the location of the database
-  databaseURL: "https://housemates-groceries-default-rtdb.firebaseio.com/",
+  databaseURL: process.env.FIREBASE_DB_URL,
 };
 
 // Initialize Firebase
