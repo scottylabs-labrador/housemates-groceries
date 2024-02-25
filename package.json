@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@realm/react": "^0.6.2",
-    "realm": "^12.6.0"
-  }
-}

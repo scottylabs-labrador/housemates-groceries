@@ -3,8 +3,6 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, Text, View } from 'react-native';
 import { writeUserData } from './src/db';
 
-// import { GroceryItem } from './src/schemas';
-
 export default function App() {
 
   // const isHermes = () => !!global.HermesInternal;

@@ -6,8 +6,11 @@ import { getDatabase, ref, set } from "firebase/database";
 const firebaseConfig = {
   // ...
   // The value of `databaseURL` depends on the location of the database
-  databaseURL: process.env.FIREBASE_DB_URL,
+  databaseURL: process.env.EXPO_PUBLIC_FIREBASE_DB_URL,
 };
+
+console.log('env', process.env);
+console.log('db url', process.env.EXPO_PUBLIC_FIREBASE_DB_URL);
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
