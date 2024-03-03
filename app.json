@@ -32,6 +32,10 @@
         "projectId": "cd258dbd-83c2-4643-b7ac-f00510a509e7"
       }
     },
-    "owner": "mzhou08"
+    "owner": "mzhou08",
+    "plugins": [
+      "expo-router"
+    ],
+    "scheme": "app-scheme"
   }
 }
