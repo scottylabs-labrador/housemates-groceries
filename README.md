@@ -2,18 +2,17 @@
 
 ## Getting Started
 
-(If on Android, download the "Expo Go" app)
+Download the "Expo Go" app
 
-Install dependencies for web:
-`npx expo install react-dom react-native-web @expo/webpack-config`
+Install dependencies `npm install`
 
-Start Expo App:
-`npx expo start --tunnel`
+Start Expo App: `npx expo start --tunnel`
 
 ## Important Links
 
 [Expo Docs](https://docs.expo.dev/tutorial/create-your-first-app/)
-[Set up NativeWind/Tailwind with Expo](https://www.nativewind.dev/quick-starts/expo)
+[NativeWind/Tailwind with Expo](https://www.nativewind.dev/quick-starts/expo)
 
-## Working with MongoDB and Realm
-[Docs](https://www.mongodb.com/docs/realm/sdk/react-native/)
+## Project Structure
+
+Pages are in `app`. Adding a new file there will automatically create a new route.
