@@ -12,7 +12,7 @@ import TextRecognition from 'react-native-text-recognition';
 export default function App() {
 
   const openai = new OpenAI({
-    apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+    apiKey: "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"//process.env['OPENAI_API_KEY'], // This is the default and can be omitted
   });
 
   const [image, setImage] = useState('');
@@ -106,7 +106,7 @@ export default function App() {
     console.log(chatCompletion.choices[0]);
   }
 
-  const processOCR_v1 = (ocrResult) => {
+  const processOCR_rulebased = (ocrResult) => {
     var allText = ocrResult["all_text"];
     var allTextArr = allText.split("\n");
 
