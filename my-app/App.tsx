@@ -12,7 +12,7 @@ import TextRecognition from 'react-native-text-recognition';
 export default function App() {
 
   const openai = new OpenAI({
-    apiKey: "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"//process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+    apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
   });
 
   const [image, setImage] = useState('');
