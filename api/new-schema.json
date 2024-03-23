@@ -1,0 +1,55 @@
+{
+    "rules": {
+        "grocerylists": {
+            "$grocerylistid": {
+                "name": {
+                    ".read": "auth !== null",
+                    ".write": "data.parent().child('housemates).hasChild(auth.uid)"
+                },
+                "housemates": {
+                    ".read": "data.hasChild(auth.uid)",
+                    ".write": "data.hasChild(auth.uid)"
+                },
+                "groceryitems": {
+                    ".read": "data.parent().child('housemates).hasChild(auth.uid)",
+                    ".write": "data.parent().child('housemates).hasChild(auth.uid)",
+                    "$groceryitemid": {
+                        ".validate": "newData.hasChildren(['name', 'quantity', 'housemates'])",
+                        "name": {".validate": true},
+                        "quantity": {".validate": true},
+                        "housemates": {".validate": true},
+                        "$other": {".validate": false}
+                    }
+                },
+                "$other": {".validate": false}
+            }
+        },
+        "housemates": {
+            "$housemateid": {
+                "name": {
+                    ".read": "auth !== null",
+                    ".write": "auth.uid === $housemateid"
+                },
+                "usename": {
+                    ".read": "auth !== null"
+                },
+                "password": {
+                    ".read": "auth.uid === $housemateid"
+                },
+                "email": {
+                    ".read": "auth !== null",
+                    ".write": "auth.uid === $housemateid"
+                },
+                "grocerylist": {
+                    ".read": "auth.uid === $housemateid",
+                    ".write": "auth.uid === $housemateid"
+                },
+                "groceryitems": {
+                    ".read": "auth.uid === $housemateid",
+                    ".write": "auth.uid === $housemateid"
+                },
+                "$other": {".validate": false}
+            }
+        }
+    }
+}
