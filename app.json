@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.labradorhousemates.groceries"
     },
     "web": {
       "bundler": "metro",
@@ -29,10 +30,13 @@
     },
     "extra": {
       "eas": {
-        "projectId": "cd258dbd-83c2-4643-b7ac-f00510a509e7"
+        "projectId": "07236bb9-952d-45b0-ac8e-6e57906aa00c"
+      },
+      "router": {
+        "origin": false
       }
     },
-    "owner": "mzhou08",
+    "owner": "labrador-housemates",
     "plugins": [
       "expo-router"
     ],
