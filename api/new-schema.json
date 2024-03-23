@@ -12,9 +12,6 @@
                     ".write": "auth.uid === $housemateid",
                     ".validate": "newData.isString()"
                 },
-                "password": {
-                    ".read": "auth.uid === $housemateid"
-                },
                 "email": {
                     ".read": "auth !== null",
                     ".write": "auth.uid === $housemateid"

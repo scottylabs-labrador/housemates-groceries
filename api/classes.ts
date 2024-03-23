@@ -4,14 +4,13 @@ class Housemate {
   userid: string;
   name: string;
   username: string;
-  password: string;
   house_ids: Array<House["housecode"]>;
  
-  constructor(name, username, password, email) {
+  constructor(name, username, email) {
     this.name = name;
     this.username = username;
-    this.password = password;
     this.userid = email;
+    this.house_ids = [];
   }
 }
 
@@ -25,8 +24,9 @@ class House {
   constructor(name, housecode) {
     this.name = name;
     this.housecode = housecode;
-    this.grocery_list = new GroceryList();
     this.members = [];
+    this.grocery_list = new GroceryList();
+    this.receipts = [];
   }
 }
 
@@ -40,6 +40,7 @@ class GroceryItem {
   constructor(name, quantity = 1) {
     this.name = name;
     this.quantity = quantity;
+    this.splits = [];
   }
 }
 
