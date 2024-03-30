@@ -1,7 +1,8 @@
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
 import { Link } from "expo-router";
 
 import "../main.css";
+import { writeGroceryItem } from "../api/firebase";
 
 export default function Page() {
   // TODO: Home page
@@ -13,6 +14,10 @@ export default function Page() {
         <Text className="text-6xl font-bold">Welcome</Text>
         <Link className="text-xl text-gray-400" href="/list">View Grocery List</Link>
         <Link className="text-xl text-gray-400" href="/scan">Scan Receipt</Link>
+        <Button 
+          title="Test"
+          color="gray"
+          onPress = {() => writeGroceryItem("chicken", 2)} />
       </View>
     </View>
   );

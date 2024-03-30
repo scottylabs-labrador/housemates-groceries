@@ -6,7 +6,7 @@ class Housemate {
   username: string;
   house_ids: Array<House["housecode"]>;
  
-  constructor(name, username, email) {
+  constructor(name: string, username: string, email: string) {
     this.name = name;
     this.username = username;
     this.userid = email;
@@ -30,14 +30,14 @@ class House {
   }
 }
 
-class GroceryItem {
+export class GroceryItem {
   itemid: string;
   name: string;
   quantity: number;
   price: number;
   splits: Array<Housemate["userid"]>;
  
-  constructor(name, quantity = 1) {
+  constructor(name: string, quantity: number = 1) {
     this.name = name;
     this.quantity = quantity;
     this.splits = [];
