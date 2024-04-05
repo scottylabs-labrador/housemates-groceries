@@ -7,9 +7,7 @@
               "name": {
                   ".validate": "newData.isString()"
               },
-              "username": {
-                  ".validate": "newData.isString()"
-              },
+              "phone_number": {},
               "email": {},
               "houses": {},
               "$other": {".validate": false}

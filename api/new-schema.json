@@ -7,12 +7,11 @@
                     ".write": "auth.uid === $housemateid",
                     ".validate": "newData.isString()"
                 },
-                "username": {
-                    ".read": "auth !== null",
-                    ".write": "auth.uid === $housemateid",
-                    ".validate": "newData.isString()"
-                },
                 "email": {
+                    ".read": "auth !== null",
+                    ".write": "auth.uid === $housemateid"
+                },
+                "phone_number": {
                     ".read": "auth !== null",
                     ".write": "auth.uid === $housemateid"
                 },

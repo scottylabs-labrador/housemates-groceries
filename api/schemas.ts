@@ -29,7 +29,7 @@ export class Housemate extends Realm.Object<Housemate> {
     name?: string;
     username!: string;
     password!: string;
-    email?:string;
+    email?: string;
     grocerylist!: Realm.List<GroceryList>;
     itemlist!: Realm.List<GroceryItem>;
 

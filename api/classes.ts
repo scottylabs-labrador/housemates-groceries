@@ -1,20 +1,22 @@
 import { Image } from "react-native";
 
-class Housemate {
+export class Housemate {
   userid: string;
   name: string;
-  username: string;
+  phone_number: string;
+  email: string;
   house_ids: Array<House["housecode"]>;
  
-  constructor(name: string, username: string, email: string) {
+  constructor(userid: string, name: string, email: string, phone_number: string) {
+    this.userid = userid;
     this.name = name;
-    this.username = username;
-    this.userid = email;
+    this.phone_number = phone_number;
+    this.email = email;
     this.house_ids = [];
   }
 }
 
-class House {
+export class House {
   name: string;
   housecode: string;
   members: Array<Housemate["userid"]>;
@@ -44,7 +46,7 @@ export class GroceryItem {
   }
 }
 
-class GroceryList {
+export class GroceryList {
   listid: string;
   items: Array<GroceryItem>;
  
@@ -53,7 +55,7 @@ class GroceryList {
   }
 }
 
-class Receipt {
+export class Receipt {
   receiptid: string;
   name: string;
   image: Image;
