@@ -8,8 +8,14 @@ const firebaseConfig = {
   // ...
   // The value of `databaseURL` depends on the location of the database
   // databaseURL: process.env.EXPO_PUBLIC_FIREBASE_DB_URL,
-
-  
+  apiKey: "AIzaSyBB6cMQdCcF-3e4JkHIDHgMzWul-V_zLmU",
+  authDomain: "housemates-groceries.firebaseapp.com",
+  databaseURL: "https://housemates-groceries-default-rtdb.firebaseio.com",
+  projectId: "housemates-groceries",
+  storageBucket: "housemates-groceries.appspot.com",
+  messagingSenderId: "566820107547",
+  appId: "1:566820107547:web:f75f358e8168c967bc4fbe",
+  measurementId: "G-MNSQVX483P"
 };
 
 // Initialize Firebase
@@ -54,3 +60,14 @@ export function readGroceryItems() {
     return data;
   })
 }
+
+export function writeHouseData(name) {
+  const db = getDatabase();
+  const house = new schema.House(name);
+  const postListRef = ref(db, 'houses/');
+  const newPostRef = push(postListRef);
+  set(newPostRef, {
+    name: house.name,
+  });
+}
+

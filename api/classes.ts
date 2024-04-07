@@ -23,9 +23,9 @@ export class House {
   grocery_list: GroceryList;
   receipts: Array<Receipt>;
 
-  constructor(name, housecode) {
+  constructor(name) {
     this.name = name;
-    this.housecode = housecode;
+    this.housecode = "";
     this.members = [];
     this.grocery_list = new GroceryList();
     this.receipts = [];
