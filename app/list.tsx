@@ -1,8 +1,6 @@
 import { View, Text, Pressable } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, set, push, onValue, get } from "firebase/database";
-import { database } from "../api/firebase";
-import { readGroceryItems } from "../api/firebase"; 
 
 export default function List() {
     // TODO: Implement the list page
