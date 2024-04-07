@@ -8,7 +8,6 @@ const firebaseConfig = {
   // ...
   // The value of `databaseURL` depends on the location of the database
   // databaseURL: process.env.EXPO_PUBLIC_FIREBASE_DB_URL,
-
   
 };
 
@@ -54,3 +53,14 @@ export function readGroceryItems() {
     return data;
   })
 }
+
+export function writeHouseData(name) {
+  const db = getDatabase();
+  const house = new schema.House(name);
+  const postListRef = ref(db, 'houses/');
+  const newPostRef = push(postListRef);
+  set(newPostRef, {
+    name: house.name,
+  });
+}
+
