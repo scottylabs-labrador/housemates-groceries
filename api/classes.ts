@@ -12,7 +12,7 @@ export class Housemate {
     this.name = name;
     this.phone_number = phone_number;
     this.email = email;
-    this.house_ids = [];
+    this.house_ids = ["test1", "test2"];
   }
 }
 

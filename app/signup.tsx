@@ -33,12 +33,12 @@ export default function SignUp({route, navigation, ...props}) {
                 value={email}
             />
             <Link href="/list" asChild>
-            <TouchableOpacity 
+            <Pressable 
                 className="bg-gray-500 hover:bg-gray-600 mt-10 py-2.5 px-4 w-fit self-center rounded-lg"
                 onPress = {() => writeUserData(name, email, phoneNumber)}
                 >
                 <Text className="text-white text-center self-center">Sign Up</Text>
-            </TouchableOpacity>
+            </Pressable>
             </Link>
         </View>
         </View>

@@ -1,5 +1,7 @@
-import { View, Text, TouchableOpacity } from 'react-native';
-
+import { View, Text, Pressable } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { getDatabase, ref, set, push, onValue, get } from "firebase/database";
+import { database } from "../api/firebase";
 import { readGroceryItems } from "../api/firebase"; 
 
 export default function List() {
@@ -7,19 +9,50 @@ export default function List() {
     // Display a list of grocery items
     // Allow users to add, remove, and update items
 
+    const [groceryItems, setGroceryItems] = useState({});
+
+    useEffect(() => {
+        const fetchData = () => {
+        const db = getDatabase();
+        const itemRef = ref(db, 'groceryitems/');
+        // let data;
+        get(itemRef).then((snapshot) => {
+            console.log(snapshot.val());
+            const data = snapshot.val();
+            setGroceryItems(data);
+        });
+        }
+
+        fetchData();
+    });
+
     return (
         <View className="flex-1 items-center padding-24">
-        <View className="flex-1 justify-center max-w-4xl mx-auto">
-            <Text className="text-6xl font-bold">Eggs</Text>
-            <Text className="text-6xl font-bold">Honeycrisp Apples</Text>
-            <Text className="text-6xl font-bold">Japanese Yams</Text>
+        <View className="flex-1 w-full padding-24">
+            {Object.keys(groceryItems).length > 0 ? (
+                Object.keys(groceryItems).map(key => (
+                <GroceryItem
+                  key={key}
+                  name={groceryItems[key].name}
+                  quantity={groceryItems[key].quantity}
+                />
+                ))
+            ) : (
+                <View>
+                    <Text className="text-3xl font-semibold text-center">Your list is empty!</Text>
+                    <Text className="text-1xl text-center">Hit the "add" button to begin creating your shared list</Text>
+                </View>
+            )}
         </View>
-        <TouchableOpacity 
-                className="bg-gray-500 hover:bg-gray-600 py-2.5 px-4 w-fit self-center rounded-lg"
-                onPress = {() => readGroceryItems}
-                >
-                <Text className="text-white text-center self-center">Test Read</Text>
-            </TouchableOpacity>
         </View>
     );
+}
+
+const GroceryItem = ({name, quantity}) => {
+    return (
+        <View className="flex-row items-stretch justify-center w-9/12 self-center m-auto">
+            <Text className="text-1xl text-left w-1/2">{name}</Text>
+            <Text className="text-1xl text-right w-1/2">{quantity}</Text>
+        </View>
+    )
 }
