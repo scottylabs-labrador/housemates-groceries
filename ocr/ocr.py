@@ -1,5 +1,6 @@
 from paddleocr import PaddleOCR,draw_ocr
 from pprint import pprint
+from pathlib import Path
 
 def get_receipt_lines(ocr_output, epsilon=5):
     """
@@ -114,7 +115,7 @@ def get_receipt_lines(ocr_output, epsilon=5):
 
     return receipt_lines
 
-def scan_receipt(receipt_path, receipt_name):
+def scan_receipt(receipt_path):
     # Paddleocr supports Chinese, English, French, German, Korean and Japanese.
     # You can set the parameter `lang` as `ch`, `en`, `french`, `german`, `korean`, `japan`
     # to switch the language model in order.
@@ -132,12 +133,14 @@ def scan_receipt(receipt_path, receipt_name):
     scores = [line[1][1] for line in result]
     im_show = draw_ocr(image, boxes, txts, scores, font_path='ocr\Arial.ttf')
     im_show = Image.fromarray(im_show)
+
+    receipt_name = Path(receipt_path).stem
     im_show.save(f'ocr-{receipt_name}.jpg')
 
     receipt_lines = get_receipt_lines(result, image.size[1] * 0.01)
 
-    pprint(receipt_lines)
+    return receipt_lines
 
 if __name__ == "__main__":
-    scan_receipt("ocr\costco.jpg", "costco")
-    scan_receipt("ocr\hk.jpeg", "hk")
+    scan_receipt("ocr\costco.jpg")
+    scan_receipt("ocr\hk.jpeg")
