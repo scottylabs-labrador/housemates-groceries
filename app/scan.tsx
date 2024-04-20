@@ -8,17 +8,12 @@ export default function Page() {
 
     const [receiptLines, setReceiptLines] = useState(0);
 
+    let RECEIPT_API_URL = 'http://127.0.0.1:8000/receiptLines';
+
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/receiptLines", {
-            "mode": "no-cors", 
-            // headers: {  
-              // Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"  
-            // }  
-          }).then(res => {
-            console.log(res);
-            return res.json()
-          }).then(data => {
-            setReceiptLines(data.time);
+        fetch(RECEIPT_API_URL)
+        .then((response) => {
+          response.json().then((data) => {setReceiptLines(data.time);});
         });
       }, []);
     
