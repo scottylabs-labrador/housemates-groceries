@@ -16,14 +16,14 @@ export default function Page() {
         <Text className="text-4xl font-bold self-center">Welcome to Green</Text>
         <Link href="/signup" asChild>
           <TouchableOpacity 
-              className="bg-gray-500 hover:bg-gray-600 mt-14 py-2.5 px-4 w-fit self-center rounded-lg"
+              className="bg-gray-500 hover:bg-gray-600 mt-14 py-2.5 px-4 w-1/3 self-center rounded-lg"
               >
               <Text className="text-white text-center self-center">Sign Up</Text>
           </TouchableOpacity>
         </Link>
-        <Link href="/signup" asChild>
+        <Link href="/signup " asChild>
           <TouchableOpacity 
-              className="bg-gray-500 hover:bg-gray-600 mt-4 mb-2 py-2.5 px-4 w-fit self-center rounded-lg"
+              className="bg-gray-500 hover:bg-gray-600 mt-4 mb-2 py-2.5 px-4 w-1/3 self-center rounded-lg"
               >
               <Text className="text-white text-center self-center">Login</Text>
           </TouchableOpacity>

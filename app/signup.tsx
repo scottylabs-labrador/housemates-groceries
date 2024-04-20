@@ -32,7 +32,7 @@ export default function SignUp({route, navigation, ...props}) {
                 onChangeText={onChangeEmail}
                 value={email}
             />
-            <Link href="/list" asChild>
+            <Link href="/login" asChild>
             <Pressable 
                 className="bg-gray-500 hover:bg-gray-600 mt-10 py-2.5 px-4 w-fit self-center rounded-lg"
                 onPress = {() => writeUserData(name, email, phoneNumber)}

@@ -31,7 +31,7 @@ export function writeUserData(name, email, phone_number) {
   });
 }
 
-export function writeGroceryItem(name, quantity) {
+export function writeGroceryItem(name, quantity=1) {
   const db = getDatabase();
   const item = new schema.GroceryItem(name, quantity);
   const postListRef = ref(db, 'groceryitems/');
@@ -48,8 +48,6 @@ export function readGroceryItems() {
   const itemRef = ref(db, 'groceryitems/');
   onValue(itemRef, (snapshot) => {
     const data = snapshot.val();
-    console.log(data);
-    console.log("hi");
     return data;
   })
 }
