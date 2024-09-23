@@ -32,9 +32,17 @@ def get_receipt_lines(ocr_output, epsilon=5):
 
     # all lines in a receipt
     receipt_lines = []
-
-    # top --> bottom 
+    
     """
+    line looks like:
+        [
+            [[x1, y1], [x2, y2], [x3, y3], [x4, y4]], (text, confidence)
+        ]
+    [top-left, top-right, bottom-right, bottom-left]
+    """
+    # going from bottom --> top seems to work better
+    ocr_output = list(reversed(ocr_output))
+
     curr_top_slope, curr_top_intercept = calculate_top_slope_and_intercept(ocr_output[0][0])
 
     for line in ocr_output:
@@ -63,52 +71,6 @@ def get_receipt_lines(ocr_output, epsilon=5):
             curr_top_slope = bb_slope
             curr_line_content.append(text)
         else:
-            # curr_top_intercept = bb_intercept
-            # curr_top_slope = bb_slope
-            curr_line_content.append(text)
-    """
-
-    # bottom --> top
-    
-    """
-    line looks like:
-        [
-            [[x1, y1], [x2, y2], [x3, y3], [x4, y4]], (text, confidence)
-        ]
-    [top-left, top-right, bottom-right, bottom-left]
-    """
-
-    curr_top_slope, curr_top_intercept = calculate_top_slope_and_intercept(ocr_output[::-1][0][0])
-    # print(ocr_output[::-1][0][0])
-
-    for line in ocr_output[::-1]:
-       
-        bounding_box = line[0]
-        pred = line[1]
-        text, confidence = pred
-
-        bb_slope, bb_intercept = calculate_top_slope_and_intercept(bounding_box)
-
-        bb_middle_x = (bounding_box[0][0] + bounding_box[1][0]) / 2
-        bb_middle_y = (bounding_box[0][1] + bounding_box[1][1]) / 2
-
-        pred_y_val = curr_top_slope*bb_middle_x + curr_top_intercept
-
-
-        difference = abs(bb_middle_y - pred_y_val)
-        
-        if difference > epsilon:
-            # we are on a new line
-            receipt_lines.append(curr_line_content)
-
-            # reset line info
-            curr_line_content = []
-            curr_top_intercept = bb_intercept
-            curr_top_slope = bb_slope
-            curr_line_content.append(text)
-        else:
-            # curr_top_intercept = bb_intercept
-            # curr_top_slope = bb_slope
             curr_line_content.append(text)
     
     receipt_lines.append(curr_line_content) 
@@ -116,31 +78,30 @@ def get_receipt_lines(ocr_output, epsilon=5):
     return receipt_lines
 
 def scan_receipt(receipt_path):
-    # Paddleocr supports Chinese, English, French, German, Korean and Japanese.
-    # You can set the parameter `lang` as `ch`, `en`, `french`, `german`, `korean`, `japan`
-    # to switch the language model in order.
-    ocr = PaddleOCR(use_angle_cls=True, lang='en') # need to run only once to download and load model into memory
-    img_path = receipt_path
+    # run OCR model on receipt image
+    ocr = PaddleOCR(use_angle_cls=True, lang='en') # download and load model into memory
     # set CLS to False. Won't be able to recognize 180deg-rotated text, but better performance
-    result = ocr.ocr(img_path, cls=False)
+    result = ocr.ocr(receipt_path, cls=False)
     result = result[0]
 
     # draw result
     from PIL import Image, ImageFont
-    image = Image.open(img_path).convert('RGB')
+    image = Image.open(receipt_path).convert('RGB')
     boxes = [line[0] for line in result]
     txts = [line[1][0] for line in result]
     scores = [line[1][1] for line in result]
-    im_show = draw_ocr(image, boxes, txts, scores, font_path='ocr\Arial.ttf')
+    im_show = draw_ocr(image, boxes, txts, scores, font_path='Arial.ttf')
     im_show = Image.fromarray(im_show)
 
     receipt_name = Path(receipt_path).stem
-    im_show.save(f'ocr-{receipt_name}.jpg')
+    im_show.save(
+        Path("test") / "output" / f'ocr-{receipt_name}.jpg'
+    )
 
     receipt_lines = get_receipt_lines(result, image.size[1] * 0.01)
 
     return receipt_lines
 
 if __name__ == "__main__":
-    scan_receipt("ocr\costco.jpg")
-    scan_receipt("ocr\hk.jpeg")
+    receipt_path = Path("test") / "costco_receipt.jpg"
+    print("\n".join([str(line) for line in scan_receipt(receipt_path=str(receipt_path))]))
