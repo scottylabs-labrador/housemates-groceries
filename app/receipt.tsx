@@ -5,7 +5,7 @@ import { writeGroceryItem } from "../api/firebase";
 import { Link } from "expo-router"; 
 import { Ionicons, FontAwesome } from '@expo/vector-icons'
 
-export default function List() {
+export default function Receipt() {
     // TODO: Implement the list page
     // Display a list of grocery items
     // Allow users to add, remove, and update items
@@ -51,44 +51,44 @@ export default function List() {
     return (
         <View className="flex-1 items-center">
         <View className="flex-1 w-full h-full bg-[#3e5636]">
-            <View className="my-16 h-fit">
-                <Text className="text-1xl text-center text-white">Home</Text>
-                <Text className="text-4xl text-center text-white">This week's list</Text>
+            <View className="my-8 h-fit w-[85%] self-center">
+                <Text className="text-2xl text-left text-white font-medium">Here's what we got.</Text>
+                <Text className="text-1xl text-left text-white">Cross-referenced with List 4.23.24</Text>
             </View>
-            <View className="w-full h-[200px] flex-grow mb-16 bg-white self-end rounded-t-[40px] pt-6 overflow-hidden mb-0">
-                <View className="flex-row items-stretch justify-center w-9/12 h-10 self-center">
-                    <Text className="text-1xl text-left text-gray-400 w-1/2">Item</Text>
-                    <Text className="text-1xl text-right text-gray-400 w-1/2">Split by:</Text>
-                </View>
-                {/* <ScrollView>
-                    {Object.keys(groceryItems).length > 0 ? (
-                        Object.keys(groceryItems).map(key => (
-                        <GroceryItem
-                            key={key}
-                            name={groceryItems[key].name}
-                            quantity={groceryItems[key].quantity}
-                            />
-                            ))
-                        ) : (
-                            <View>
-                                <Text className="text-3xl font-semibold text-center">Your list is empty!</Text>
-                                <Text className="text-1xl text-center">Hit the "add" button to begin creating your shared list</Text>
-                            </View>
-                    )}
-                </ScrollView> */}
-                {Object.keys(groceryItems).length > 0 ? (
-                    <FlatList 
-                    className="h-full"
-                    data={Object.keys(groceryItems)}
-                    renderItem={renderItem}
-                    keyExtractor={item => item}
-                    />
-                ) : (
-                    <View>
-                        <Text className="text-3xl font-semibold text-center">Your list is empty!</Text>
-                        <Text className="text-1xl text-center">Hit the "add" button to begin creating your shared list</Text>
+            <View className="w-full flex-grow mb-6 self-end px-8">
+              <View className="w-full h-[200px] flex-grow mb-0 bg-white self-end rounded-[40px] pt-6 overflow-hidden">
+                  <View className="flex-row items-stretch justify-center w-9/12 h-10 self-center">
+                      <Text className="text-1xl text-left text-gray-400 w-1/2">Item</Text>
+                      <Text className="text-1xl text-right text-gray-400 w-1/2">Split by:</Text>
+                  </View>
+                  {Object.keys(groceryItems).length > 0 ? (
+                      <FlatList 
+                        className="h-full"
+                        data={Object.keys(groceryItems)}
+                        renderItem={renderItem}
+                        keyExtractor={item => item}
+                      />
+                  ) : (
+                      <View>
+                          <Text className="text-3xl font-semibold text-center">Your list is empty!</Text>
+                          <Text className="text-1xl text-center">Hit the "add" button to begin creating your shared list</Text>
+                      </View>
+                  )}
+                  <View className="h-1/5 pt-8 w-[85%] flex-row items-stretch justify-center self-center">
+                    <View className="w-1/2">
+                        <Pressable 
+                            className="absolute w-fit h-8 items-center justify-center bg-[#3e5636] hover:bg-gray-600 py-2.5 px-4 rounded-lg"
+                            onPress={toggleModal}
+                        >
+                            <Text className="text-white text-center self-center bg-gray">Add/Edit Items +</Text>
+                        </Pressable>
                     </View>
-                )}
+                    <Text className="w-1/2 text-right">Personal Total: $15.46</Text>
+                  </View>
+              </View>
+              <View className="w-full bg-white h-[12%] my-6 mb-16 rounded-xl px-4 py-2">
+                <Text>Sort by Roommate</Text>
+              </View>
             </View>
             <View className="justify-center bg-white h-16 w-full fixed bottom-0 items-center m-0">
                 <View className="w-3/4 flex-row flex space-x-4 justify-between">
@@ -114,20 +114,6 @@ export default function List() {
                     </Link>
                 </View>
             </View>
-
-            <Link href="/" asChild>
-                <Pressable 
-                    className="absolute w-fit h-8 items-center justify-center left-10 bottom-20 bg-[#3e5636] hover:bg-gray-600 py-2.5 px-4 rounded-lg shadow-lg"
-                >
-                    <Text className="text-white text-center self-center">See Past Items</Text>
-                </Pressable>
-            </Link>
-            <Pressable 
-                className="absolute w-10 h-8 items-center justify-center right-12 bottom-20 shadow-lg"
-                onPress={toggleModal}
-            >
-                <Ionicons name="add-circle" size={76} color="#3e5636"/>
-            </Pressable>
             
             <Modal 
                 visible={modalVisible}
