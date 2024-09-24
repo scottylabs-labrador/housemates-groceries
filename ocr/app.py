@@ -1,20 +1,40 @@
-from flask import Flask, jsonify
-from flask_cors import CORS
+import base64
+from datetime import datetime
+from io import BytesIO
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import json
 from ocr import scan_receipt
+from pathlib import Path
+from PIL import Image
+from pydantic import BaseModel
 
-"""
-https://flask.palletsprojects.com/en/3.0.x/quickstart/
-https://blog.miguelgrinberg.com/post/how-to-create-a-react--flask-project"""
+app = FastAPI()
 
-app = Flask(__name__)
-CORS(app, resources={r'/*': {'origins': '*'}})
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
-@app.route("/receiptLines", methods=["POST"])
-def scan_receipt_image():
-    img_bytes = request.get_data()
-    with open("receipt_img", "wb") as f:
-        f.write(img_bytes)
-    return jsonify(scan_receipt("request_img.png"))
+class ReceiptLinesArgs(BaseModel):
+    image: str
 
-if __name__ == "__main__":
-    app.run(port=8000, debug=True)
+@app.post("/receiptLines")
+def scan_receipt_image(args: ReceiptLinesArgs):
+    image_url = args.image
+    
+    # strip the metadata from the front of the image URI
+    assert image_url.startswith("data:image/png;base64,")
+    image_b64 = image_url.split(",")[1]
+
+    image_data = base64.b64decode(image_b64)
+    image = Image.open(BytesIO(image_data))
+
+    image_path = Path(f"imgs") / f"{datetime.now().strftime('%Y%m%d%H%M%S')}.png"
+    image.save(image_path)
+
+    return json.dumps(
+        scan_receipt(str(image_path), debug=True)
+    )

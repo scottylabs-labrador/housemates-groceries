@@ -77,12 +77,22 @@ def get_receipt_lines(ocr_output, epsilon=5):
 
     return receipt_lines
 
-def scan_receipt(receipt_path):
+def scan_receipt(receipt_path, debug=False):
+    """
+    Given a path to a receipt image, return the lines of the receipt.
+    receipt_path: path to the receipt image
+    debug: if True, save the image with the OCR results drawn on it
+    """
+
     # run OCR model on receipt image
     ocr = PaddleOCR(use_angle_cls=True, lang='en') # download and load model into memory
     # set CLS to False. Won't be able to recognize 180deg-rotated text, but better performance
     result = ocr.ocr(receipt_path, cls=False)
     result = result[0]
+
+    # there was no text detected
+    if result is None:
+        return []
 
     # draw result
     from PIL import Image, ImageFont
@@ -94,9 +104,11 @@ def scan_receipt(receipt_path):
     im_show = Image.fromarray(im_show)
 
     receipt_name = Path(receipt_path).stem
-    im_show.save(
-        Path("test") / "output" / f'ocr-{receipt_name}.jpg'
-    )
+
+    if debug:
+        im_show.save(
+            Path("output") / f'ocr-{receipt_name}.jpg'
+        )
 
     receipt_lines = get_receipt_lines(result, image.size[1] * 0.01)
 
@@ -104,4 +116,9 @@ def scan_receipt(receipt_path):
 
 if __name__ == "__main__":
     receipt_path = Path("test") / "costco_receipt.jpg"
-    print("\n".join([str(line) for line in scan_receipt(receipt_path=str(receipt_path))]))
+    print(
+        "\n".join([
+            str(line) for line in
+            scan_receipt(receipt_path=str(receipt_path))
+        ])
+    )
