@@ -8,7 +8,7 @@ export default function Page() {
     const [permission, requestPermission] = Camera.useCameraPermissions();
     const [camera, setCamera] = useState(null);
 
-    const [receiptLines, setReceiptLines] = useState(0);
+    const [receiptLines, setReceiptLines] = useState([]);
 
     let RECEIPT_API_URL = 'http://127.0.0.1:8000/receiptLines';
 
@@ -23,7 +23,6 @@ export default function Page() {
     function takePicture() {
       if (camera) {
         camera.takePictureAsync({onPictureSaved: (data) => {
-          console.log(data);
           fetch(RECEIPT_API_URL, {
             method: 'POST',
             mode: 'cors',
@@ -33,6 +32,12 @@ export default function Page() {
             body: JSON.stringify({
               "image": data.base64
             }),
+          }).then((response) =>
+            // receipt lines
+            response.json()
+          ).then((data) => {
+            console.log(data);
+            setReceiptLines(data)
           });
         }});
       }

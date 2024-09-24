@@ -31,7 +31,16 @@ Create virtual environment in the `ocr` folder: `cd ocr; virtualenv venv; source
 
 Install dependencies: `python3 -m pip install -r requirements.txt`
 
-Start server: `python3 -m uvicorn app:app`
+Start server: `python3 -m uvicorn app:app --reload`
+
+## Testing & Scripts
+
+You can test the OCR output by:
+
+- Add a new receipt image into `ocr/test`
+- Run `scripts/test_receipt.sh --receipt_name=<your receipt image name>`
+
+You can clear the OCR images and debug output with `./scripts/clear_images.sh`
 
 ## Important Links
 

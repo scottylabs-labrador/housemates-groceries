@@ -2,7 +2,7 @@
 
 ocr/__pycache__/
 ocr/imgs/
-ocr/outputs/
+ocr/output/
 
 # dependencies
 node_modules/

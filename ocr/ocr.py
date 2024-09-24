@@ -115,10 +115,16 @@ def scan_receipt(receipt_path, debug=False):
     return receipt_lines
 
 if __name__ == "__main__":
-    receipt_path = Path("test") / "costco_receipt.jpg"
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--receipt_name", type=str, help="receipt image file name")
+    args = parser.parse_args()
+
+    receipt_path = Path("test") / args.receipt_name
+
     print(
         "\n".join([
             str(line) for line in
-            scan_receipt(receipt_path=str(receipt_path))
+            scan_receipt(receipt_path=str(receipt_path), debug=True)
         ])
     )
