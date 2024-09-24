@@ -62,5 +62,6 @@ tifffile==2023.7.10
 tqdm==4.66.5
 typing_extensions==4.12.2
 urllib3==2.2.3
+uvicorn==0.30.6
 Werkzeug==3.0.4
 zipp==3.20.2
