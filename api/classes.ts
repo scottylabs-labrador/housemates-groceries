@@ -39,10 +39,10 @@ export class GroceryItem {
   price: number;
   splits: Array<Housemate["userid"]>;
  
-  constructor(name: string, quantity: number = 1) {
+  constructor(name: string, quantity: number = 1, splits: Array<Housemate["userid"]> = []) {
     this.name = name;
     this.quantity = quantity;
-    this.splits = [];
+    this.splits = splits;
   }
 }
 
