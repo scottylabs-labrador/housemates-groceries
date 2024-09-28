@@ -55,7 +55,7 @@ export default function List() {
                 <Text className="text-1xl text-center text-white">Home</Text>
                 <Text className="text-4xl text-center text-white">This week's list</Text>
             </View>
-            <View className="w-full h-[200px] flex-grow mb-16 bg-white self-end rounded-t-[40px] pt-6 overflow-hidden mb-0">
+            <View className="w-full h-[200px] flex-grow bg-white self-end rounded-t-[40px] pt-6 pb-32 overflow-hidden mb-0">
                 <View className="flex-row items-stretch justify-center w-9/12 h-10 self-center">
                     <Text className="text-1xl text-left text-gray-400 w-1/2">Item</Text>
                     <Text className="text-1xl text-right text-gray-400 w-1/2">Split by:</Text>
