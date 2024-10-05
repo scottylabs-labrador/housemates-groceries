@@ -1,6 +1,7 @@
 import { Text, View, Button, TextInput, TouchableOpacity} from "react-native";
 import { Link } from "expo-router";
 import React, { useState, useCallback } from 'react';
+import { router } from "expo-router"
 
 import "../main.css";
 import { writeHouseData } from "../api/firebase";
@@ -8,6 +9,13 @@ import { writeHouseData } from "../api/firebase";
 export default function Page() {
     const [name, onChangeName] = useState('');
     const [code, onChangeCode] = useState('');
+    const id: [string, string] = ["temp", "FF0000"];
+
+    function changetojoin(name, id){
+        const housecode = "HIHIHIHIHI";
+        writeHouseData(name, id, housecode);
+        router.replace('/joinhouse?key='+housecode)
+    }
 
     return (
         <View className="flex-1 items-center padding-24">
@@ -19,14 +27,12 @@ export default function Page() {
                 onChangeText={onChangeName}
                 value={name}
             />
-            <Link href="/createhouse" asChild>
             <TouchableOpacity 
                 className="bg-gray-500 hover:bg-gray-600 mt-10 py-2.5 px-4 w-fit self-center rounded-lg"
-                onPress = {() => writeHouseData(name)}
+                onPress = {() => changetojoin(name, id)}
                 >
                 <Text className="text-white text-center self-center">Create House</Text>
             </TouchableOpacity>
-            </Link>
         </View>
         </View>
     );

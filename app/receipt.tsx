@@ -50,7 +50,7 @@ export default function Receipt() {
 
     return (
         <View className="flex-1 items-center">
-        <View className="flex-1 w-full h-full bg-[#3e5636]">
+        <View className="flex-1 w-full h-full bg-gray-400">
             <View className="my-8 h-fit w-[85%] self-center">
                 <Text className="text-2xl text-left text-white font-medium">Here's what we got.</Text>
                 <Text className="text-1xl text-left text-white">Cross-referenced with List 4.23.24</Text>

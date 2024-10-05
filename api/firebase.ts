@@ -8,7 +8,14 @@ const firebaseConfig = {
   // ...
   // The value of `databaseURL` depends on the location of the database
   // databaseURL: process.env.EXPO_PUBLIC_FIREBASE_DB_URL,
-  
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_DB_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.EXPO_PUBLIC_FIREBASE_DB_URL,
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
@@ -52,13 +59,14 @@ export function readGroceryItems() {
   })
 }
 
-export function writeHouseData(name) {
+export function writeHouseData(name, id, housecode) {
   const db = getDatabase();
-  const house = new schema.House(name);
-  const postListRef = ref(db, 'houses/');
-  const newPostRef = push(postListRef);
-  set(newPostRef, {
+  const house = new schema.House(name, id);
+  const postListRef = ref(db, 'houses/'+ housecode);
+  set(postListRef, {
     name: house.name,
-  });
+    members: house.members
+  })
+  return postListRef;
 }
 

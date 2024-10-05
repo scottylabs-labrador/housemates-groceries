@@ -12,7 +12,7 @@ export class Housemate {
     this.name = name;
     this.phone_number = phone_number;
     this.email = email;
-    this.house_ids = ["test1", "test2"];
+    this.house_ids = [];
   }
 }
 
@@ -23,10 +23,10 @@ export class House {
   grocery_list: GroceryList;
   receipts: Array<Receipt>;
 
-  constructor(name) {
+  constructor(name, id) {
     this.name = name;
     this.housecode = "";
-    this.members = [];
+    this.members = [id];
     this.grocery_list = new GroceryList();
     this.receipts = [];
   }

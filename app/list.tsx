@@ -50,7 +50,7 @@ export default function List() {
 
     return (
         <View className="flex-1 items-center">
-        <View className="flex-1 w-full h-full bg-[#3e5636]">
+        <View className="flex-1 w-full h-full bg-gray-400">
             <View className="my-16 h-fit">
                 <Text className="text-1xl text-center text-white">Home</Text>
                 <Text className="text-4xl text-center text-white">This week's list</Text>
